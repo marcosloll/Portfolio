@@ -1,0 +1,393 @@
+/* ===========================
+   1. VARIÁVEIS E RESET
+=========================== */
+:root {
+  --bg: #05070a;
+  --surface: #0a0e16;
+  --border: #1c2733;
+
+  --blue: #00d4ff;
+  --blue-deep: #0a4d8c;
+  --red-alert: #ff2b3d;
+
+  --text: #e8eef2;
+  --muted: #5a6b7c;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}
+
+body {
+  background:
+    linear-gradient(var(--border) 1px, transparent 1px) 0 0 / 60px 60px,
+    linear-gradient(90deg, var(--border) 1px, transparent 1px) 0 0 / 60px 60px,
+    var(--bg);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: "JetBrains Mono", monospace;
+  cursor: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Orbitron", sans-serif;
+}
+
+a,
+button,
+.project-file {
+  cursor: none;
+}
+
+/* ===========================
+   2. CURSOR CUSTOMIZADO
+=========================== */
+#cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--blue);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-ring {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition:
+    width 0.2s,
+    height 0.2s;
+}
+
+/* ===========================
+   3. ANIMAÇÃO DE SCROLL (REVEAL)
+=========================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================
+   4. NAVBAR
+=========================== */
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 8vw;
+  background: rgba(5, 7, 10, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: "Orbitron", sans-serif;
+  color: var(--blue);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--blue);
+}
+
+/* ===========================
+   5. BOTÕES (CTAs)
+=========================== */
+.btn-solid,
+.btn-outline {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  padding: 0.9rem 1.8rem;
+  text-decoration: none;
+  border-radius: 2px;
+  display: inline-block;
+  transition:
+    background 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.btn-solid {
+  background: var(--blue);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.btn-solid:hover {
+  background: var(--text);
+  transform: translateY(-4px);
+}
+
+.btn-outline {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-outline:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-4px);
+}
+
+/* ===========================
+   6. HERO
+=========================== */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8vw;
+  padding-top: 5rem;
+}
+
+.status-line {
+  color: var(--blue);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.hero-role {
+  margin-top: 1rem;
+  color: var(--muted);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* ===========================
+   7. SOBRE
+=========================== */
+#sobre {
+  padding: 6rem 8vw;
+}
+
+.sobre-content {
+  max-width: 700px;
+}
+
+.sobre-text {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.sobre-stack {
+  display: flex;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.stack-item {
+  font-size: 0.75rem;
+  color: var(--blue);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===========================
+   8. SEÇÃO DE TÍTULO (genérico)
+=========================== */
+.section-tag {
+  color: var(--blue);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.8rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 3rem;
+}
+
+/* ===========================
+   9. PROJETOS
+=========================== */
+#projetos {
+  padding: 8rem 8vw;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.project-file {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.8rem;
+  border-radius: 2px;
+  text-decoration: none;
+  display: block;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.project-file * {
+  text-decoration: none;
+}
+
+.project-file:hover {
+  border-color: var(--blue);
+  transform: translateY(-6px);
+}
+
+.file-id {
+  font-size: 0.75rem;
+  color: var(--red-alert);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.8rem;
+}
+
+.file-name {
+  font-size: 1.1rem;
+  margin-bottom: 0.6rem;
+}
+
+.file-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 1.2rem;
+}
+
+.file-stack {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.file-stack span {
+  font-size: 0.7rem;
+  color: var(--blue);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.6rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===========================
+   10. CONTATO
+=========================== */
+#contato {
+  padding: 8rem 8vw;
+  text-align: center;
+}
+
+.contact-desc {
+  color: var(--muted);
+  max-width: 480px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.6;
+}
+
+.contact-links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* ===========================
+   11. FOOTER
+=========================== */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--blue);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border);
+}
+
+/* ===========================
+   12. RESPONSIVO (MOBILE)
+=========================== */
+@media (max-width: 640px) {
+  #navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem 6vw;
+  }
+
+  .nav-links {
+    gap: 1.2rem;
+  }
+
+  #hero,
+  #sobre,
+  #projetos,
+  #contato {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+
+  .hero-ctas,
+  .contact-links {
+    flex-direction: column;
+  }
+}
