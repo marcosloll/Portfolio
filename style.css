@@ -373,7 +373,17 @@ footer {
     gap: 0.8rem;
     padding: 1rem 6vw;
   }
+  #cursor-dot,
+  #cursor-ring {
+    display: none;
+  }
 
+  body,
+  a,
+  button,
+  .project-file {
+    cursor: auto;
+  }
   .nav-links {
     gap: 1.2rem;
   }
